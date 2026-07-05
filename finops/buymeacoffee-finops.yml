@@ -1,0 +1,99 @@
+specification: FinOps Framework
+specificationVersion: '1.0'
+schema: https://www.finops.org/framework/
+provider: Buy Me a Coffee
+providerId: buymeacoffee
+created: '2026-07-05'
+modified: '2026-07-05'
+reconciled: false
+tags:
+- Creator Economy
+- Memberships
+- Payments
+- FinOps
+- Cost Management
+- FOCUS
+description: >-
+  FinOps view of Buy Me a Coffee spend. Buy Me a Coffee is unusual for a
+  FinOps profile in that the platform is a revenue channel for creators rather
+  than a cost center - but it does levy fees. There is no monthly subscription
+  fee; instead the platform retains a flat 5% of each transaction (tips,
+  memberships, and shop / Extras sales), and third-party payment processing
+  (Stripe) is charged separately at roughly 2.9% + 0.30 USD per transaction
+  plus a small payout-processing fee. The developer API is free to use. For a
+  team consuming the API, the direct API cost is effectively zero; the
+  meaningful "spend" is the platform + processing fees deducted from creator
+  earnings.
+notes: >-
+  Exact Stripe processing rates vary by country and can change. Treat the 5%
+  platform fee and no-monthly-fee as the anchor terms and verify processing
+  rates during reconciliation.
+sources:
+- https://buymeacoffee.com/
+- https://help.buymeacoffee.com/en/articles/8105744-how-to-calculate-charges-on-your-payment
+- https://developers.buymeacoffee.com/
+- https://focus.finops.org/focus-specification/v1-3/
+alignedWith:
+  framework: FinOps Foundation Framework
+  frameworkUrl: https://www.finops.org/framework/
+  dataSpec: FOCUS
+  dataSpecVersion: '1.3'
+  dataSpecUrl: https://focus.finops.org/focus-specification/v1-3/
+publisherName: Buy Me a Coffee
+serviceCategory: Creator Monetization and Payments
+billingModel:
+  pricingCategory: Usage-Based
+  billingFrequency: Per Transaction
+  billingCurrency: USD
+  chargeCategories:
+  - Usage
+  - Purchase
+  - Adjustment
+focusColumns:
+  ServiceName: Buy Me a Coffee
+  ServiceCategory: Creator Monetization and Payments
+  ProviderName: Buy Me a Coffee
+  PublisherName: Buy Me a Coffee
+  InvoiceIssuerName: Buy Me a Coffee
+  BillingCurrency: USD
+  ChargeCategory: Usage
+  PricingCategory: Usage-Based
+meters:
+- name: platform_fee
+  description: Flat 5% platform fee retained by Buy Me a Coffee on each transaction.
+  unit: percent
+  aggregation: sum
+  dimensions:
+  - account
+  - transaction_type
+- name: payment_processing_fee
+  description: Third-party Stripe processing fee (~2.9% + $0.30) per successful transaction.
+  unit: transaction
+  aggregation: sum
+  dimensions:
+  - account
+  - country
+- name: payout_fee
+  description: Stripe payout-processing fee applied when transferring balance to the creator.
+  unit: payout
+  aggregation: sum
+  dimensions:
+  - account
+- name: api_usage
+  description: Developer API calls; free of charge (no metered cost).
+  unit: requests
+  aggregation: sum
+  dimensions:
+  - token
+principles:
+- name: Visibility
+  description: Track the 5% platform fee and Stripe processing separately from gross transaction volume; the API returns amounts and currency per supporter, member, and Extras purchase for reconciliation.
+- name: Allocation
+  description: Attribute earnings and fees by transaction type (tips vs memberships vs Extras) and by country using the fields returned from the API.
+- name: Optimization
+  description: There is no monthly fee to optimize away; focus on the mix of transaction types and on payout timing/threshold to minimize per-payout processing overhead.
+- name: Accountability
+  description: Export supporter/member/Extras data via the API to reconcile net payouts against gross transactions and the deducted platform + processing fees.
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

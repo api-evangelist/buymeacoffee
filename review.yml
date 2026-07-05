@@ -1,0 +1,138 @@
+aid: buymeacoffee
+name: Buy Me a Coffee
+review:
+  question: Does Buy Me a Coffee expose a documented public WebSocket API?
+  answer: false
+  date: '2026-07-05'
+  reviewer: API Evangelist
+  asyncapiSpecCreated: false
+  asyncapiScopeNote: |
+    No AsyncAPI document was authored. Buy Me a Coffee's own developer API is
+    request/response REST over HTTPS. The platform does deliver server-push
+    events, but only via outbound HTTP webhooks (Buy Me a Coffee POSTs a JSON
+    event envelope to a subscriber URL), not via a WebSocket or SSE stream on
+    Buy Me a Coffee's own API. Per current API Evangelist scope, an
+    endpoint-to-endpoint HTTP webhook is not a WebSocket transport, so no
+    WebSocket AsyncAPI surface exists to model. The webhook catalog is
+    documented in the review transports and could be modeled separately if
+    webhook AsyncAPI comes into scope.
+findings:
+  summary: |
+    Buy Me a Coffee does not publish a documented public WebSocket API. Buy
+    Me a Coffee is a creator-support platform (tips, memberships, and a shop
+    of "Extras"). Its developer API is a read-only REST interface at base
+    https://developers.buymeacoffee.com/api/v1, authenticated with a personal
+    access Bearer token created self-serve in the Developer Dashboard (log in
+    with a regular Buy Me a Coffee account, Create New Token, optionally
+    read-only). The documented surface is pure request/response REST over
+    HTTPS: list/get one-time supporters, list/get members (subscriptions),
+    and list/get Extras purchases, all paginated. The platform also delivers
+    server-push events through outbound HTTP webhooks (configured in the
+    dashboard, signed with an HMAC-SHA256 x-signature-sha256 header) - which
+    is server-to-endpoint HTTP, not a WebSocket. No realtime, bidirectional,
+    or streaming WebSocket (ws:// or wss://) endpoint is documented anywhere
+    on Buy Me a Coffee's own API as of the review date.
+  accessModel: |
+    The developer API is public and self-serve: any Buy Me a Coffee account
+    holder can create a personal access token in the Developer Dashboard
+    without an approval/partner process. The token is read-only-capable and
+    scoped to that creator's own account data. The full API reference sits
+    behind the dashboard login (there is no fully public, unauthenticated
+    HTML reference), and Buy Me a Coffee does not publish a machine-readable
+    OpenAPI document publicly. Endpoint paths and query params below are
+    confirmed from the developer docs, community API wrappers, and the
+    Microsoft Power Platform connector; the single-resource by-ID URL
+    templates are honestly modeled from the documented "get by ID" operations.
+  transports:
+    - protocol: REST
+      scheme: https
+      baseURL: https://developers.buymeacoffee.com/api/v1
+      documented: true
+      note: Read-only developer API. Bearer token auth. Paginated collections.
+    - protocol: Webhook
+      scheme: https
+      documented: true
+      note: >-
+        Outbound HTTP webhooks configured in the dashboard (Integrations - New
+        webhook). Buy Me a Coffee POSTs a JSON event envelope to a subscriber
+        URL, signed with an HMAC-SHA256 x-signature-sha256 header. Server-to-
+        endpoint HTTP, not WebSocket.
+    - protocol: WebSocket
+      scheme: wss
+      documented: false
+      note: >-
+        No WebSocket endpoint is documented anywhere in Buy Me a Coffee's
+        developer API, webhook docs, or product pages as of the review date.
+  endpointsConfirmedRest:
+    - GET https://developers.buymeacoffee.com/api/v1/supporters
+    - GET https://developers.buymeacoffee.com/api/v1/subscriptions
+    - GET https://developers.buymeacoffee.com/api/v1/extras
+  endpointsModeled:
+    - GET https://developers.buymeacoffee.com/api/v1/supporters/{id}
+    - GET https://developers.buymeacoffee.com/api/v1/subscriptions/{id}
+    - GET https://developers.buymeacoffee.com/api/v1/extras/{id}
+  endpointsModeledNote: |
+    The "get one-time supporter by ID", "get member by ID", and "get extra by
+    ID" operations are documented (and exposed by the Microsoft connector as
+    SupporterGetA / MemberGetA / ExtraGetA), but the exact URL templates are
+    inferred from the confirmed collection endpoints plus standard REST
+    conventions - they are not quoted verbatim from a public reference.
+  queryParameters:
+    - name: status
+      endpoint: /subscriptions
+      values: [all, active, inactive]
+      note: Filters members by membership status.
+    - name: page
+      endpoint: all collections
+      note: Laravel-style pagination (current_page, per_page, next_page_url, total).
+  webhookEvents:
+    donations:
+      - donation.created
+      - donation.refunded
+    memberships:
+      - membership.started
+      - membership.updated
+      - membership.cancelled
+      - membership.paused
+      - recurring_donation.started
+      - recurring_donation.updated
+      - recurring_donation.cancelled
+    shopAndCommissions:
+      - extra_purchase.created
+      - extra_purchase.updated
+      - extra_purchase.refunded
+      - commission_order.created
+      - commission_order.refunded
+      - wishlist_payment.created
+      - wishlist_payment.refunded
+    signature: HMAC-SHA256 over the raw request body, delivered in the x-signature-sha256 header.
+sources:
+  - url: https://developers.buymeacoffee.com/
+    type: Documentation
+    note: Developer Dashboard and API reference (login required). Bearer token auth; read-only API.
+  - url: https://learn.microsoft.com/en-us/connectors/buymeacoffeeip/
+    type: APIReference
+    note: Microsoft Power Platform connector wrapping the same API - confirms supporters, members (subscriptions), and extras operations plus response schemas; documents a 100 calls / 60s connector throttle.
+  - url: https://help.buymeacoffee.com/en/articles/15743173-how-to-setup-and-use-buy-me-a-coffee-webhooks
+    type: Documentation
+    note: Webhook setup, the 16 event types, JSON event envelope, and the HMAC-SHA256 x-signature-sha256 signature header. All HTTP webhooks, no WebSocket.
+  - url: https://help.buymeacoffee.com/en/articles/8105744-how-to-calculate-charges-on-your-payment
+    type: Documentation
+    note: Fee model - flat 5% platform fee, no monthly fee, plus Stripe processing.
+  - url: https://codetouch.com/coffeecompanion/help/personal-access-token/
+    type: Reference
+    note: How to create a personal access token in the Developer Dashboard (Create New Token, read-only option).
+  - url: https://buymeacoffee.js.org/
+    type: SourceCode
+    note: Community NodeJS API wrapper confirming REST usage over the developer API.
+actions:
+  asyncapiPath: null
+  apisYmlUpdated: true
+  reason: |
+    No WebSocket protocol surface exists. Buy Me a Coffee's own public API is
+    request/response REST (read-only supporters, subscriptions, and Extras),
+    and its only server-push mechanism is outbound HTTP webhooks - not a
+    WebSocket or SSE stream on Buy Me a Coffee's own API. No AsyncAPI document
+    was created because there is no WebSocket (or SSE) transport on Buy Me a
+    Coffee's own API to model; the webhook catalog is captured in the review
+    transports for completeness.

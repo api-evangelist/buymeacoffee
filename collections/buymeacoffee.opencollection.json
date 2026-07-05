@@ -1,0 +1,97 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Buy Me a Coffee API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": { "name": "Supporters", "type": "folder" },
+      "items": [
+        {
+          "info": { "name": "List one-time supporters", "type": "http" },
+          "http": {
+            "method": "GET",
+            "url": "https://developers.buymeacoffee.com/api/v1/supporters",
+            "params": [
+              { "name": "page", "value": "1", "type": "query", "description": "Page number for the paginated collection." }
+            ]
+          },
+          "docs": "Returns all of your one-time supporters and their messages, if any, as a paginated collection."
+        },
+        {
+          "info": { "name": "Get a one-time supporter by ID", "type": "http" },
+          "http": {
+            "method": "GET",
+            "url": "https://developers.buymeacoffee.com/api/v1/supporters/:id",
+            "params": [
+              { "name": "id", "value": "", "type": "path", "description": "The unique identifier of the one-time supporter." }
+            ]
+          },
+          "docs": "Returns a single one-time supporter by its unique ID. By-ID path modeled from the documented operation."
+        }
+      ]
+    },
+    {
+      "info": { "name": "Subscriptions", "type": "folder" },
+      "items": [
+        {
+          "info": { "name": "List members / subscriptions", "type": "http" },
+          "http": {
+            "method": "GET",
+            "url": "https://developers.buymeacoffee.com/api/v1/subscriptions",
+            "params": [
+              { "name": "status", "value": "active", "type": "query", "description": "Filter by membership status: all, active, or inactive." },
+              { "name": "page", "value": "1", "type": "query", "description": "Page number for the paginated collection." }
+            ]
+          },
+          "docs": "Returns all of your members with active and inactive statuses, paginated."
+        },
+        {
+          "info": { "name": "Get a member / subscription by ID", "type": "http" },
+          "http": {
+            "method": "GET",
+            "url": "https://developers.buymeacoffee.com/api/v1/subscriptions/:id",
+            "params": [
+              { "name": "id", "value": "", "type": "path", "description": "The unique identifier of the member / subscription." }
+            ]
+          },
+          "docs": "Returns membership details by passing its unique identifier. By-ID path modeled from the documented operation."
+        }
+      ]
+    },
+    {
+      "info": { "name": "Extras", "type": "folder" },
+      "items": [
+        {
+          "info": { "name": "List Extras purchases (BETA)", "type": "http" },
+          "http": {
+            "method": "GET",
+            "url": "https://developers.buymeacoffee.com/api/v1/extras",
+            "params": [
+              { "name": "page", "value": "1", "type": "query", "description": "Page number for the paginated collection." }
+            ]
+          },
+          "docs": "Returns all of your Extras purchases data, paginated."
+        },
+        {
+          "info": { "name": "Get an Extras purchase by ID (BETA)", "type": "http" },
+          "http": {
+            "method": "GET",
+            "url": "https://developers.buymeacoffee.com/api/v1/extras/:id",
+            "params": [
+              { "name": "id", "value": "", "type": "path", "description": "The unique identifier of the extra purchase (Purchase ID)." }
+            ]
+          },
+          "docs": "Returns data about an extra purchase by its unique Purchase ID. By-ID path modeled from the documented operation."
+        }
+      ]
+    }
+  ]
+}

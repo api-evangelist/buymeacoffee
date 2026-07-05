@@ -1,0 +1,451 @@
+openapi: 3.0.3
+info:
+  title: Buy Me a Coffee API
+  description: >-
+    The Buy Me a Coffee API is a read-only REST interface that gives a creator
+    programmatic access to their own account data on Buy Me a Coffee - a
+    creator-support platform for tips, memberships, and shop purchases.
+    Authentication uses a personal access Bearer token created self-serve in
+    the Developer Dashboard (log in with a regular Buy Me a Coffee account,
+    then Create New Token; a read-only option is available). Add
+    `Authorization: Bearer <token>` to every request. The API returns
+    paginated collections (Laravel-style pagination with current_page,
+    per_page, next_page_url, total, etc.) and exposes one-time supporters,
+    memberships/subscriptions, and Extras purchases.
+
+    NOTE ON MODELING: Buy Me a Coffee does not publish a machine-readable
+    OpenAPI document publicly (the reference sits behind the Developer
+    Dashboard login). The collection endpoints and query parameters here
+    (/subscriptions with status, /supporters, /extras, all paginated) are
+    confirmed from the developer docs, community wrappers, and the Microsoft
+    Power Platform connector. The single-resource by-ID paths
+    (/subscriptions/{id}, /supporters/{id}, /extras/{id}) are honestly modeled
+    from the documented "get by ID" operations; the exact URL templates are
+    inferred, not quoted verbatim, and are marked with x-endpoint-modeled.
+  version: '1.0'
+  contact:
+    name: Buy Me a Coffee
+    url: https://developers.buymeacoffee.com/
+servers:
+  - url: https://developers.buymeacoffee.com/api/v1
+    description: Buy Me a Coffee API v1
+security:
+  - bearerAuth: []
+tags:
+  - name: Supporters
+    description: One-time supporters (tips / coffees) and their messages.
+  - name: Subscriptions
+    description: Recurring memberships / subscriptions (members).
+  - name: Extras
+    description: Extras purchases (shop items and rewards). BETA.
+paths:
+  /supporters:
+    get:
+      operationId: getSupporters
+      tags:
+        - Supporters
+      summary: List one-time supporters
+      description: >-
+        Returns all of your one-time supporters and their messages, if any,
+        as a paginated collection.
+      parameters:
+        - $ref: '#/components/parameters/Page'
+      responses:
+        '200':
+          description: A paginated list of one-time supporters.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SupporterPage'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '429':
+          $ref: '#/components/responses/RateLimited'
+  /supporters/{id}:
+    get:
+      operationId: getSupporter
+      tags:
+        - Supporters
+      summary: Get a one-time supporter by ID
+      description: >-
+        Returns a single one-time supporter and their message by the
+        supporter's unique ID.
+      x-endpoint-modeled: >-
+        The "get one-time supporter by ID" operation is documented, but the
+        exact URL template is inferred from the collection endpoint and
+        standard REST conventions.
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: The unique identifier of the one-time supporter.
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: A single one-time supporter.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Supporter'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '429':
+          $ref: '#/components/responses/RateLimited'
+  /subscriptions:
+    get:
+      operationId: getSubscriptions
+      tags:
+        - Subscriptions
+      summary: List members / subscriptions
+      description: >-
+        Returns all of your members (recurring memberships / subscriptions)
+        with both active and inactive statuses, as a paginated collection.
+      parameters:
+        - name: status
+          in: query
+          required: false
+          description: Filter by membership status.
+          schema:
+            type: string
+            enum:
+              - all
+              - active
+              - inactive
+            default: all
+        - $ref: '#/components/parameters/Page'
+      responses:
+        '200':
+          description: A paginated list of members / subscriptions.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SubscriptionPage'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '429':
+          $ref: '#/components/responses/RateLimited'
+  /subscriptions/{id}:
+    get:
+      operationId: getSubscription
+      tags:
+        - Subscriptions
+      summary: Get a member / subscription by ID
+      description: Returns membership details by passing its unique identifier.
+      x-endpoint-modeled: >-
+        The "get member by ID" operation is documented, but the exact URL
+        template is inferred from the collection endpoint and standard REST
+        conventions.
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: The unique identifier of the member / subscription.
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: A single member / subscription.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Subscription'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '429':
+          $ref: '#/components/responses/RateLimited'
+  /extras:
+    get:
+      operationId: getExtras
+      tags:
+        - Extras
+      summary: List Extras purchases (BETA)
+      description: Returns all of your Extras purchases data as a paginated collection.
+      parameters:
+        - $ref: '#/components/parameters/Page'
+      responses:
+        '200':
+          description: A paginated list of Extras purchases.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExtraPage'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '429':
+          $ref: '#/components/responses/RateLimited'
+  /extras/{id}:
+    get:
+      operationId: getExtra
+      tags:
+        - Extras
+      summary: Get an Extras purchase by ID (BETA)
+      description: >-
+        Returns data about an extra purchase by its unique ID. The ID is the
+        same as the Purchase ID returned in the list response.
+      x-endpoint-modeled: >-
+        The "get extra by ID" operation is documented, but the exact URL
+        template is inferred from the collection endpoint and standard REST
+        conventions.
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: The unique identifier of the extra purchase (Purchase ID).
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: A single Extras purchase.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Extra'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '429':
+          $ref: '#/components/responses/RateLimited'
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      description: >-
+        Personal access token created in the Buy Me a Coffee Developer
+        Dashboard. Sent as `Authorization: Bearer <token>`.
+  parameters:
+    Page:
+      name: page
+      in: query
+      required: false
+      description: Page number for the paginated collection.
+      schema:
+        type: integer
+        minimum: 1
+        default: 1
+  responses:
+    Unauthorized:
+      description: Missing or invalid Bearer token.
+    NotFound:
+      description: The requested resource was not found.
+    RateLimited:
+      description: Too many requests; the client is being throttled.
+  schemas:
+    Pagination:
+      type: object
+      description: Laravel-style pagination envelope wrapping a data array.
+      properties:
+        current_page:
+          type: integer
+        first_page_url:
+          type: string
+        from:
+          type: integer
+        last_page:
+          type: integer
+        last_page_url:
+          type: string
+        next_page_url:
+          type: string
+          nullable: true
+        path:
+          type: string
+        per_page:
+          type: integer
+        prev_page_url:
+          type: string
+          nullable: true
+        to:
+          type: integer
+        total:
+          type: integer
+    Supporter:
+      type: object
+      properties:
+        support_id:
+          type: integer
+        support_note:
+          type: string
+          nullable: true
+        support_coffees:
+          type: integer
+        transaction_id:
+          type: string
+        support_visibility:
+          type: integer
+        support_created_on:
+          type: string
+        support_updated_on:
+          type: string
+        transfer_id:
+          type: string
+          nullable: true
+        supporter_name:
+          type: string
+        support_coffee_price:
+          type: string
+        support_email:
+          type: string
+          nullable: true
+        is_refunded:
+          type: string
+          nullable: true
+        support_currency:
+          type: string
+        support_note_pinned:
+          type: integer
+        referer:
+          type: string
+          nullable: true
+        country:
+          type: string
+          nullable: true
+        payer_email:
+          type: string
+          nullable: true
+        payment_platform:
+          type: string
+        payer_name:
+          type: string
+    SupporterPage:
+      allOf:
+        - $ref: '#/components/schemas/Pagination'
+        - type: object
+          properties:
+            data:
+              type: array
+              items:
+                $ref: '#/components/schemas/Supporter'
+    Subscription:
+      type: object
+      properties:
+        subscription_id:
+          type: integer
+        subscription_cancelled_on:
+          type: string
+          nullable: true
+        subscription_created_on:
+          type: string
+        subscription_updated_on:
+          type: string
+        subscription_current_period_start:
+          type: string
+        subscription_current_period_end:
+          type: string
+        subscription_coffee_price:
+          type: string
+        subscription_coffee_num:
+          type: integer
+        subscription_is_cancelled:
+          type: string
+          nullable: true
+        subscription_is_cancelled_at_period_end:
+          type: string
+          nullable: true
+        subscription_currency:
+          type: string
+        subscription_message:
+          type: string
+          nullable: true
+        message_visibility:
+          type: integer
+        subscription_duration_type:
+          type: string
+        referer:
+          type: string
+          nullable: true
+        country:
+          type: string
+          nullable: true
+        transaction_id:
+          type: string
+        payer_email:
+          type: string
+          nullable: true
+        payer_name:
+          type: string
+    SubscriptionPage:
+      allOf:
+        - $ref: '#/components/schemas/Pagination'
+        - type: object
+          properties:
+            data:
+              type: array
+              items:
+                $ref: '#/components/schemas/Subscription'
+    Reward:
+      type: object
+      properties:
+        reward_id:
+          type: integer
+        reward_title:
+          type: string
+        reward_description:
+          type: string
+        reward_confirmation_message:
+          type: string
+          nullable: true
+        reward_question:
+          type: string
+          nullable: true
+        reward_used:
+          type: integer
+        reward_created_on:
+          type: string
+        reward_updated_on:
+          type: string
+        reward_deleted_on:
+          type: string
+          nullable: true
+        reward_is_active:
+          type: integer
+        reward_image:
+          type: string
+          nullable: true
+        reward_slots:
+          type: integer
+          nullable: true
+        reward_coffee_price:
+          type: string
+        reward_order:
+          type: integer
+    Extra:
+      type: object
+      properties:
+        purchase_id:
+          type: integer
+        purchased_on:
+          type: string
+        purchase_updated_on:
+          type: string
+        purchase_is_revoked:
+          type: integer
+        purchase_amount:
+          type: string
+        purchase_currency:
+          type: string
+        purchase_question:
+          type: string
+          nullable: true
+        payer_email:
+          type: string
+          nullable: true
+        payer_name:
+          type: string
+        extra:
+          $ref: '#/components/schemas/Reward'
+    ExtraPage:
+      allOf:
+        - $ref: '#/components/schemas/Pagination'
+        - type: object
+          properties:
+            data:
+              type: array
+              items:
+                $ref: '#/components/schemas/Extra'

@@ -1,0 +1,104 @@
+specification: API Commons Plans
+specificationVersion: '0.1'
+schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/Plans
+provider: Buy Me a Coffee
+providerId: buymeacoffee
+created: '2026-07-05'
+modified: '2026-07-05'
+reconciled: false
+tags:
+- Creator Economy
+- Memberships
+- Subscriptions
+- Tips
+- Payments
+- Plans
+description: >-
+  Buy Me a Coffee has no monthly subscription fee for creators. The platform
+  monetizes with a flat 5% platform fee applied to transactions (tips /
+  coffees, memberships, and shop / Extras sales); creators keep 95% before
+  payment processing. Standard payment processing (Stripe) is charged
+  separately - roughly 2.9% plus 0.30 USD per successful transaction, plus a
+  small Stripe payout-processing fee. Payouts are transferred to the creator's
+  connected Stripe account (typically weekly, once a balance threshold is met)
+  and then deposited to the creator's bank. The developer API itself is free to
+  use with a personal access Bearer token; there is no separate API charge.
+notes: >-
+  The 5% platform fee and no-monthly-fee model are the headline terms; exact
+  Stripe processing rates vary by country and can change. Verify current fees
+  on the Buy Me a Coffee help center during reconciliation.
+sources:
+- https://buymeacoffee.com/
+- https://help.buymeacoffee.com/en/articles/8105744-how-to-calculate-charges-on-your-payment
+- https://help.buymeacoffee.com/en/articles/4539170-frequently-asked-questions
+- https://developers.buymeacoffee.com/
+plans:
+- id: buymeacoffee-creator
+  name: Creator (No Monthly Fee)
+  type: usage
+  description: >-
+    The single creator plan. No monthly or setup fee. Accept one-time tips,
+    recurring memberships, and shop / Extras purchases. Buy Me a Coffee takes
+    a flat 5% platform fee per transaction; the creator keeps 95% before
+    payment processing.
+  entries:
+  - label: Platform Fee
+    name: platform_fee
+    type: usage
+    metric: transaction
+    limit: -1
+    timeFrame: month
+    geo: global
+    unit: 1
+    price: 5% of each transaction (tips, memberships, and shop sales)
+    userMultiplied: false
+  - label: Monthly Subscription Fee
+    name: monthly_fee
+    type: flat
+    metric: subscription
+    limit: -1
+    timeFrame: month
+    geo: global
+    unit: 1
+    price: $0 (no monthly fee)
+    userMultiplied: false
+  elements:
+  - name: One-Time Tips (Coffees)
+  - name: Memberships / Subscriptions
+  - name: Extras / Shop
+  - name: Developer API (personal access token)
+  - name: Webhooks
+- id: buymeacoffee-payment-processing
+  name: Payment Processing (Stripe)
+  type: usage
+  description: >-
+    Standard third-party payment processing charged in addition to the 5%
+    platform fee. Collected by Stripe, not retained by Buy Me a Coffee as
+    platform revenue. Rates vary by country.
+  entries:
+  - label: Processing Fee
+    name: processing_fee
+    type: usage
+    metric: transaction
+    limit: -1
+    timeFrame: month
+    geo: global
+    unit: 1
+    price: ~2.9% + $0.30 per successful transaction (Stripe; varies by country)
+    userMultiplied: false
+  - label: Payout Processing
+    name: payout_fee
+    type: usage
+    metric: payout
+    limit: -1
+    timeFrame: month
+    geo: global
+    unit: 1
+    price: ~0.5% Stripe payout processing (varies by country)
+    userMultiplied: false
+  elements:
+  - name: Stripe Processing
+  - name: Weekly Payouts
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

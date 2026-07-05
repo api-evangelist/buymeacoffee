@@ -1,0 +1,88 @@
+{
+  "info": {
+    "name": "Buy Me a Coffee API",
+    "description": "Read-only REST access to a creator's own Buy Me a Coffee account data: one-time supporters, memberships/subscriptions, and Extras purchases. Base URL: https://developers.buymeacoffee.com/api/v1. Authenticate with a personal access Bearer token created self-serve in the Developer Dashboard. Collection endpoints (/supporters, /subscriptions, /extras) and the status/page query params are confirmed; the by-ID paths are modeled from the documented 'get by ID' operations.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      { "key": "token", "value": "{{bearerToken}}", "type": "string" }
+    ]
+  },
+  "variable": [
+    { "key": "baseUrl", "value": "https://developers.buymeacoffee.com/api/v1", "type": "string" },
+    { "key": "bearerToken", "value": "", "type": "string" }
+  ],
+  "item": [
+    {
+      "name": "Supporters",
+      "item": [
+        {
+          "name": "List one-time supporters",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/supporters?page=1", "host": ["{{baseUrl}}"], "path": ["supporters"], "query": [{ "key": "page", "value": "1" }] },
+            "description": "Returns all of your one-time supporters and their messages, if any, as a paginated collection."
+          }
+        },
+        {
+          "name": "Get a one-time supporter by ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/supporters/:id", "host": ["{{baseUrl}}"], "path": ["supporters", ":id"], "variable": [{ "key": "id", "value": "" }] },
+            "description": "Returns a single one-time supporter by its unique ID. (By-ID path modeled from the documented operation.)"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Subscriptions",
+      "item": [
+        {
+          "name": "List members / subscriptions",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/subscriptions?status=active&page=1", "host": ["{{baseUrl}}"], "path": ["subscriptions"], "query": [{ "key": "status", "value": "active" }, { "key": "page", "value": "1" }] },
+            "description": "Returns all of your members with active and inactive statuses, paginated. Use status=all|active|inactive to filter."
+          }
+        },
+        {
+          "name": "Get a member / subscription by ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/subscriptions/:id", "host": ["{{baseUrl}}"], "path": ["subscriptions", ":id"], "variable": [{ "key": "id", "value": "" }] },
+            "description": "Returns membership details by passing its unique identifier. (By-ID path modeled from the documented operation.)"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Extras",
+      "item": [
+        {
+          "name": "List Extras purchases (BETA)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/extras?page=1", "host": ["{{baseUrl}}"], "path": ["extras"], "query": [{ "key": "page", "value": "1" }] },
+            "description": "Returns all of your Extras purchases data, paginated."
+          }
+        },
+        {
+          "name": "Get an Extras purchase by ID (BETA)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/extras/:id", "host": ["{{baseUrl}}"], "path": ["extras", ":id"], "variable": [{ "key": "id", "value": "" }] },
+            "description": "Returns data about an extra purchase by its unique Purchase ID. (By-ID path modeled from the documented operation.)"
+          }
+        }
+      ]
+    }
+  ]
+}

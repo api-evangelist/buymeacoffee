@@ -1,0 +1,61 @@
+specification: API Commons Rate Limits
+specificationVersion: '0.1'
+schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/RateLimits
+provider: Buy Me a Coffee
+providerId: buymeacoffee
+created: '2026-07-05'
+modified: '2026-07-05'
+reconciled: false
+tags:
+- Creator Economy
+- Memberships
+- Payments
+- Rate Limiting
+- Quotas
+description: >-
+  Buy Me a Coffee does not publish an official numeric rate limit for its
+  developer API in the public-facing documentation. The API is read-only and
+  personal (scoped to a single creator's own account), so request volumes are
+  naturally low. The Microsoft Power Platform connector that wraps the same
+  API enforces a client-side throttle of 100 calls per connection per 60
+  seconds - a reasonable practical guideline, though it is the connector's
+  limit rather than a value Buy Me a Coffee documents directly. Results are
+  paginated (Laravel-style current_page / per_page / next_page_url), so large
+  supporter, member, or Extras lists should be walked page by page rather than
+  polled aggressively.
+notes: >-
+  No official per-account or per-endpoint numeric limit is documented by Buy
+  Me a Coffee as of the review date; the 100-calls/60s figure is from the
+  Microsoft connector and is modeled here as a practical guideline. Verify
+  current limits in the Developer Dashboard during reconciliation.
+sources:
+- https://developers.buymeacoffee.com/
+- https://learn.microsoft.com/en-us/connectors/buymeacoffeeip/
+responseCodes:
+  throttled: 429
+limits:
+- name: Developer API Requests
+  scope: token
+  metric: requests
+  limit: not officially published
+  notes: No fixed numeric request-rate limit is documented by Buy Me a Coffee for the developer API.
+- name: Connector Throttle (practical guideline)
+  scope: connection
+  metric: requests
+  limit: 100 per 60 seconds
+  notes: Enforced by the Microsoft Power Platform connector wrapping the same API; modeled here as a practical guideline, not an official Buy Me a Coffee value.
+- name: Pagination Page Size
+  scope: request
+  metric: records
+  limit: per_page (server-defined)
+  notes: Collections return a fixed per_page count; walk next_page_url to page through supporters, members, and Extras.
+policies:
+- name: Read-Only Access
+  description: The developer API is read-only (GET); tokens can be created with a read-only option in the Developer Dashboard.
+- name: Backoff Strategy
+  description: On a 429 response, implement exponential backoff with jitter before retrying.
+- name: Paginate Not Poll
+  description: Use next_page_url to page through large result sets instead of repeatedly polling the first page.
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

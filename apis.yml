@@ -1,0 +1,126 @@
+aid: buymeacoffee
+url: https://raw.githubusercontent.com/api-evangelist/buymeacoffee/refs/heads/main/apis.yml
+name: Buy Me a Coffee
+kind: company
+description: Buy Me a Coffee is a creator-support platform that lets fans tip
+  creators ("buy a coffee"), subscribe to recurring memberships, and buy extras
+  from a creator's shop. Its developer API is a read-only REST interface (base
+  https://developers.buymeacoffee.com/api/v1) authenticated with a personal
+  access Bearer token created self-serve in the Developer Dashboard. The API
+  exposes a creator's own one-time supporters, memberships/subscriptions, and
+  extra purchases, and the platform also delivers server-push webhooks for
+  donation, membership, and shop events. Buy Me a Coffee charges a flat 5%
+  platform fee on transactions with no monthly fee.
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+tags:
+- Creator Economy
+- Memberships
+- Subscriptions
+- Tips
+- Payments
+- Donations
+created: '2026-07-05'
+modified: '2026-07-05'
+specificationVersion: '0.19'
+apis:
+- aid: buymeacoffee:buymeacoffee-supporters-api
+  name: Buy Me a Coffee Supporters API
+  tags:
+  - Supporters
+  - Donations
+  - Tips
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://developers.buymeacoffee.com/
+  baseURL: https://developers.buymeacoffee.com/api/v1
+  properties:
+  - url: https://developers.buymeacoffee.com/
+    type: Documentation
+  - url: openapi/buymeacoffee-openapi.yml
+    type: OpenAPI
+  - url: collections/buymeacoffee.postman_collection.json
+    type: PostmanCollection
+  - url: collections/buymeacoffee.opencollection.json
+    type: OpenCollection
+  description: Read-only access to a creator's one-time supporters (tips /
+    "coffees") and the messages they leave. List all supporters with pagination,
+    or retrieve a single supporter by its unique ID. Returns support amount,
+    coffee count, currency, note, payer details, and refund status.
+- aid: buymeacoffee:buymeacoffee-subscriptions-api
+  name: Buy Me a Coffee Subscriptions API
+  tags:
+  - Subscriptions
+  - Memberships
+  - Recurring
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://developers.buymeacoffee.com/
+  baseURL: https://developers.buymeacoffee.com/api/v1
+  properties:
+  - url: https://developers.buymeacoffee.com/
+    type: Documentation
+  - url: openapi/buymeacoffee-openapi.yml
+    type: OpenAPI
+  - url: collections/buymeacoffee.postman_collection.json
+    type: PostmanCollection
+  - url: collections/buymeacoffee.opencollection.json
+    type: OpenCollection
+  description: Read-only access to a creator's recurring memberships /
+    subscriptions. List members filtered by status (all, active, or inactive)
+    with pagination, or retrieve a single member's subscription details by ID.
+    Returns subscription period, coffee price and count, currency, duration
+    type, cancellation state, and payer details.
+- aid: buymeacoffee:buymeacoffee-extras-api
+  name: Buy Me a Coffee Extras API
+  tags:
+  - Extras
+  - Shop
+  - Purchases
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://developers.buymeacoffee.com/
+  baseURL: https://developers.buymeacoffee.com/api/v1
+  properties:
+  - url: https://developers.buymeacoffee.com/
+    type: Documentation
+  - url: openapi/buymeacoffee-openapi.yml
+    type: OpenAPI
+  - url: collections/buymeacoffee.postman_collection.json
+    type: PostmanCollection
+  - url: collections/buymeacoffee.opencollection.json
+    type: OpenCollection
+  description: Read-only access (BETA) to a creator's Extras purchases - the
+    shop items and rewards fans buy. List all extra purchases with pagination,
+    or retrieve a single extra purchase by its unique purchase ID. Returns
+    purchase amount, currency, reward metadata, payer details, and revoke state.
+- aid: buymeacoffee:buymeacoffee-webhooks-api
+  name: Buy Me a Coffee Webhooks
+  tags:
+  - Webhooks
+  - Events
+  - Notifications
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://help.buymeacoffee.com/en/articles/15743173-how-to-setup-and-use-buy-me-a-coffee-webhooks
+  baseURL: https://developers.buymeacoffee.com/api/v1
+  properties:
+  - url: https://help.buymeacoffee.com/en/articles/15743173-how-to-setup-and-use-buy-me-a-coffee-webhooks
+    type: Documentation
+  description: Server-push HTTP webhooks configured in the dashboard
+    (Integrations - New webhook). Buy Me a Coffee POSTs a JSON event envelope
+    to a subscriber URL for donation, membership / recurring-donation, extra
+    purchase, commission, and wishlist events. Each request is signed with an
+    HMAC-SHA256 signature in the x-signature-sha256 header. This is
+    server-to-endpoint HTTP, not a WebSocket.
+common:
+- type: LinkedIn
+  url: https://www.linkedin.com/company/buymeacoffee
+- type: Website
+  url: https://www.buymeacoffee.com
+- type: Documentation
+  url: https://developers.buymeacoffee.com/
+- type: Plans
+  url: plans/buymeacoffee-plans-pricing.yml
+- type: RateLimits
+  url: rate-limits/buymeacoffee-rate-limits.yml
+- type: FinOps
+  url: finops/buymeacoffee-finops.yml
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

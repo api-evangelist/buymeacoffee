@@ -109,6 +109,10 @@ apis:
     HMAC-SHA256 signature in the x-signature-sha256 header. This is
     server-to-endpoint HTTP, not a WebSocket.
 common:
+- type: DomainSecurity
+  url: security/buymeacoffee-domain-security.yml
+- type: Authentication
+  url: authentication/buymeacoffee-authentication.yml
 - type: LinkedIn
   url: https://www.linkedin.com/company/buymeacoffee
 - type: Website

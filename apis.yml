@@ -109,6 +109,8 @@ apis:
     HMAC-SHA256 signature in the x-signature-sha256 header. This is
     server-to-endpoint HTTP, not a WebSocket.
 common:
+- type: AgenticAccess
+  url: agentic-access/buymeacoffee-agentic-access.yml
 - type: DomainSecurity
   url: security/buymeacoffee-domain-security.yml
 - type: Authentication

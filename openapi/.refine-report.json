@@ -1,0 +1,18 @@
+{
+  "provider": "buymeacoffee",
+  "sources": [
+    "buymeacoffee-extras-api-openapi.yml",
+    "buymeacoffee-subscriptions-api-openapi.yml",
+    "buymeacoffee-supporters-api-openapi.yml"
+  ],
+  "outputs": [
+    "buymeacoffee-extras-api-openapi.yml",
+    "buymeacoffee-subscriptions-api-openapi.yml",
+    "buymeacoffee-supporters-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}

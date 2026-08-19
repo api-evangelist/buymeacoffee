@@ -1,0 +1,459 @@
+{
+  "item": [
+    {
+      "id": "2535d405-ac06-426a-ae77-85c66dee93be",
+      "name": "Extras",
+      "description": {
+        "content": "Extras purchases (shop items and rewards). BETA.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "083ce38f-9d78-40c1-8b05-4adcd1e35fef",
+          "name": "List Extras purchases (BETA)",
+          "request": {
+            "name": "List Extras purchases (BETA)",
+            "description": {
+              "content": "Returns all of your Extras purchases data as a paginated collection.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "extras"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "1",
+                  "description": "Page number for the paginated collection."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "70827167-089a-416a-a85c-35da20f3a8bb",
+              "name": "A paginated list of Extras purchases.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "extras"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "1"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"current_page\": 9190,\n  \"first_page_url\": \"string\",\n  \"from\": 9355,\n  \"last_page\": 621,\n  \"last_page_url\": \"string\",\n  \"next_page_url\": \"string\",\n  \"path\": \"string\",\n  \"per_page\": 6035,\n  \"prev_page_url\": \"string\",\n  \"to\": 1155,\n  \"total\": 2616,\n  \"data\": [\n    {\n      \"purchase_id\": 1546,\n      \"purchased_on\": \"string\",\n      \"purchase_updated_on\": \"string\",\n      \"purchase_is_revoked\": 9565,\n      \"purchase_amount\": \"string\",\n      \"purchase_currency\": \"string\",\n      \"purchase_question\": \"string\",\n      \"payer_email\": \"string\",\n      \"payer_name\": \"string\",\n      \"extra\": {\n        \"reward_id\": 9991,\n        \"reward_title\": \"string\",\n        \"reward_description\": \"string\",\n        \"reward_confirmation_message\": \"string\",\n        \"reward_question\": \"string\",\n        \"reward_used\": 7565,\n        \"reward_created_on\": \"string\",\n        \"reward_updated_on\": \"string\",\n        \"reward_deleted_on\": \"string\",\n        \"reward_is_active\": 6830,\n        \"reward_image\": \"string\",\n        \"reward_slots\": 6431,\n        \"reward_coffee_price\": \"string\",\n        \"reward_order\": 6851\n      }\n    },\n    {\n      \"purchase_id\": 6418,\n      \"purchased_on\": \"string\",\n      \"purchase_updated_on\": \"string\",\n      \"purchase_is_revoked\": 471,\n      \"purchase_amount\": \"string\",\n      \"purchase_currency\": \"string\",\n      \"purchase_question\": \"string\",\n      \"payer_email\": \"string\",\n      \"payer_name\": \"string\",\n      \"extra\": {\n        \"reward_id\": 5181,\n        \"reward_title\": \"string\",\n        \"reward_description\": \"string\",\n        \"reward_confirmation_message\": \"string\",\n        \"reward_question\": \"string\",\n        \"reward_used\": 4991,\n        \"reward_created_on\": \"string\",\n        \"reward_updated_on\": \"string\",\n        \"reward_deleted_on\": \"string\",\n        \"reward_is_active\": 4809,\n        \"reward_image\": \"string\",\n        \"reward_slots\": 9966,\n        \"reward_coffee_price\": \"string\",\n        \"reward_order\": 9854\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2a570481-bc99-4953-8052-d93ffcb75295",
+              "name": "Missing or invalid Bearer token.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "extras"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "1"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "1c2dfd18-7b06-47e5-8da3-beef282d6e1c",
+              "name": "Too many requests; the client is being throttled.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "extras"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "1"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d4dddd62-2564-42f2-8f26-561e5fe8160b",
+          "name": "Get an Extras purchase by ID (BETA)",
+          "request": {
+            "name": "Get an Extras purchase by ID (BETA)",
+            "description": {
+              "content": "Returns data about an extra purchase by its unique ID. The ID is the same as the Purchase ID returned in the list response.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "extras",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "id",
+                  "description": "(Required) The unique identifier of the extra purchase (Purchase ID)."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "8e168bc4-ec58-4d4b-8aa1-7d98ae68ff35",
+              "name": "A single Extras purchase.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "extras",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier of the extra purchase (Purchase ID)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"purchase_id\": 6225,\n  \"purchased_on\": \"string\",\n  \"purchase_updated_on\": \"string\",\n  \"purchase_is_revoked\": 1408,\n  \"purchase_amount\": \"string\",\n  \"purchase_currency\": \"string\",\n  \"purchase_question\": \"string\",\n  \"payer_email\": \"string\",\n  \"payer_name\": \"string\",\n  \"extra\": {\n    \"reward_id\": 1697,\n    \"reward_title\": \"string\",\n    \"reward_description\": \"string\",\n    \"reward_confirmation_message\": \"string\",\n    \"reward_question\": \"string\",\n    \"reward_used\": 5165,\n    \"reward_created_on\": \"string\",\n    \"reward_updated_on\": \"string\",\n    \"reward_deleted_on\": \"string\",\n    \"reward_is_active\": 5849,\n    \"reward_image\": \"string\",\n    \"reward_slots\": 7234,\n    \"reward_coffee_price\": \"string\",\n    \"reward_order\": 8089\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7d95a280-e73c-4bc2-a407-e8a9c74d6493",
+              "name": "Missing or invalid Bearer token.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "extras",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier of the extra purchase (Purchase ID)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "4efe2d57-2164-4dc9-8b58-87d0686451ee",
+              "name": "The requested resource was not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "extras",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier of the extra purchase (Purchase ID)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "7134e777-fb0d-4d5f-a632-4a7585243e3e",
+              "name": "Too many requests; the client is being throttled.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "extras",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier of the extra purchase (Purchase ID)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://developers.buymeacoffee.com/api/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "3472c0ec-9c28-4c3f-98d8-d8a20fbcad6e",
+    "name": "Buy Me a Coffee Extras API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Buy Me a Coffee API is a read-only REST interface that gives a creator programmatic access to their own account data on Buy Me a Coffee - a creator-support platform for tips, memberships, and shop purchases. Authentication uses a personal access Bearer token created self-serve in the Developer Dashboard (log in with a regular Buy Me a Coffee account, then Create New Token; a read-only option is available). Add `Authorization: Bearer <token>` to every request. The API returns paginated collections (Laravel-style pagination with current_page, per_page, next_page_url, total, etc.) and exposes one-time supporters, memberships/subscriptions, and Extras purchases.\nNOTE ON MODELING: Buy Me a Coffee does not publish a machine-readable OpenAPI document publicly (the reference sits behind the Developer Dashboard login). The collection endpoints and query parameters here (/subscriptions with status, /supporters, /extras, all paginated) are confirmed from the developer docs, community wrappers, and the Microsoft Power Platform connector. The single-resource by-ID paths (/subscriptions/{id}, /supporters/{id}, /extras/{id}) are honestly modeled from the documented \"get by ID\" operations; the exact URL templates are inferred, not quoted verbatim, and are marked with x-endpoint-modeled.\n\nContact Support:\n Name: Buy Me a Coffee",
+      "type": "text/plain"
+    }
+  }
+}

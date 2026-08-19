@@ -1,0 +1,459 @@
+{
+  "item": [
+    {
+      "id": "cae9592d-1d10-4161-bd5b-471d24a6d2e0",
+      "name": "Supporters",
+      "description": {
+        "content": "One-time supporters (tips / coffees) and their messages.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "3dad586e-8886-479c-a14e-92660c2f5dfe",
+          "name": "List one-time supporters",
+          "request": {
+            "name": "List one-time supporters",
+            "description": {
+              "content": "Returns all of your one-time supporters and their messages, if any, as a paginated collection.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "supporters"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "1",
+                  "description": "Page number for the paginated collection."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "68b1f096-cd1d-4727-8fa8-5745995891f3",
+              "name": "A paginated list of one-time supporters.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "supporters"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "1"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"current_page\": 3461,\n  \"first_page_url\": \"string\",\n  \"from\": 6588,\n  \"last_page\": 1009,\n  \"last_page_url\": \"string\",\n  \"next_page_url\": \"string\",\n  \"path\": \"string\",\n  \"per_page\": 3361,\n  \"prev_page_url\": \"string\",\n  \"to\": 8364,\n  \"total\": 2201,\n  \"data\": [\n    {\n      \"support_id\": 5181,\n      \"support_note\": \"string\",\n      \"support_coffees\": 7360,\n      \"transaction_id\": \"string\",\n      \"support_visibility\": 2380,\n      \"support_created_on\": \"string\",\n      \"support_updated_on\": \"string\",\n      \"transfer_id\": \"string\",\n      \"supporter_name\": \"string\",\n      \"support_coffee_price\": \"string\",\n      \"support_email\": \"string\",\n      \"is_refunded\": \"string\",\n      \"support_currency\": \"string\",\n      \"support_note_pinned\": 5127,\n      \"referer\": \"string\",\n      \"country\": \"string\",\n      \"payer_email\": \"string\",\n      \"payment_platform\": \"string\",\n      \"payer_name\": \"string\"\n    },\n    {\n      \"support_id\": 9008,\n      \"support_note\": \"string\",\n      \"support_coffees\": 3262,\n      \"transaction_id\": \"string\",\n      \"support_visibility\": 4191,\n      \"support_created_on\": \"string\",\n      \"support_updated_on\": \"string\",\n      \"transfer_id\": \"string\",\n      \"supporter_name\": \"string\",\n      \"support_coffee_price\": \"string\",\n      \"support_email\": \"string\",\n      \"is_refunded\": \"string\",\n      \"support_currency\": \"string\",\n      \"support_note_pinned\": 1639,\n      \"referer\": \"string\",\n      \"country\": \"string\",\n      \"payer_email\": \"string\",\n      \"payment_platform\": \"string\",\n      \"payer_name\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d0910b2b-16ff-4095-8d41-a2fb6a6d9ae8",
+              "name": "Missing or invalid Bearer token.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "supporters"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "1"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "f4794288-70e1-41e4-a547-a3d16d5da803",
+              "name": "Too many requests; the client is being throttled.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "supporters"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "1"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f8432a39-510b-49f3-9a4b-f8d072002436",
+          "name": "Get a one-time supporter by ID",
+          "request": {
+            "name": "Get a one-time supporter by ID",
+            "description": {
+              "content": "Returns a single one-time supporter and their message by the supporter's unique ID.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "supporters",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "id",
+                  "description": "(Required) The unique identifier of the one-time supporter."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "bb122449-388f-462f-9f1d-f8ef6ab14368",
+              "name": "A single one-time supporter.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "supporters",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier of the one-time supporter."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"support_id\": 5937,\n  \"support_note\": \"string\",\n  \"support_coffees\": 1190,\n  \"transaction_id\": \"string\",\n  \"support_visibility\": 3683,\n  \"support_created_on\": \"string\",\n  \"support_updated_on\": \"string\",\n  \"transfer_id\": \"string\",\n  \"supporter_name\": \"string\",\n  \"support_coffee_price\": \"string\",\n  \"support_email\": \"string\",\n  \"is_refunded\": \"string\",\n  \"support_currency\": \"string\",\n  \"support_note_pinned\": 8026,\n  \"referer\": \"string\",\n  \"country\": \"string\",\n  \"payer_email\": \"string\",\n  \"payment_platform\": \"string\",\n  \"payer_name\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "864c9bcf-0f1c-4047-9b80-5ebcfb15ae24",
+              "name": "Missing or invalid Bearer token.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "supporters",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier of the one-time supporter."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "b5fa5216-4c4d-4be0-bf5a-b32a095ea1dc",
+              "name": "The requested resource was not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "supporters",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier of the one-time supporter."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "5bd52f0d-dd6a-4884-8875-5198f5ff873d",
+              "name": "Too many requests; the client is being throttled.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "supporters",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier of the one-time supporter."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://developers.buymeacoffee.com/api/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "f5f413d9-0060-451a-9327-c65c456d4f38",
+    "name": "Buy Me a Coffee Extras Supporters API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Buy Me a Coffee API is a read-only REST interface that gives a creator programmatic access to their own account data on Buy Me a Coffee - a creator-support platform for tips, memberships, and shop purchases. Authentication uses a personal access Bearer token created self-serve in the Developer Dashboard (log in with a regular Buy Me a Coffee account, then Create New Token; a read-only option is available). Add `Authorization: Bearer <token>` to every request. The API returns paginated collections (Laravel-style pagination with current_page, per_page, next_page_url, total, etc.) and exposes one-time supporters, memberships/subscriptions, and Extras purchases.\nNOTE ON MODELING: Buy Me a Coffee does not publish a machine-readable OpenAPI document publicly (the reference sits behind the Developer Dashboard login). The collection endpoints and query parameters here (/subscriptions with status, /supporters, /extras, all paginated) are confirmed from the developer docs, community wrappers, and the Microsoft Power Platform connector. The single-resource by-ID paths (/subscriptions/{id}, /supporters/{id}, /extras/{id}) are honestly modeled from the documented \"get by ID\" operations; the exact URL templates are inferred, not quoted verbatim, and are marked with x-endpoint-modeled.\n\nContact Support:\n Name: Buy Me a Coffee",
+      "type": "text/plain"
+    }
+  }
+}

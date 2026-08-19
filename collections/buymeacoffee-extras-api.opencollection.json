@@ -1,0 +1,62 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Buy Me a Coffee Extras API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Extras",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Extras purchases (BETA)",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://developers.buymeacoffee.com/api/v1/extras",
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Page number for the paginated collection."
+              }
+            ]
+          },
+          "docs": "Returns all of your Extras purchases data as a paginated collection."
+        },
+        {
+          "info": {
+            "name": "Get an Extras purchase by ID (BETA)",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://developers.buymeacoffee.com/api/v1/extras/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the extra purchase (Purchase ID)."
+              }
+            ]
+          },
+          "docs": "Returns data about an extra purchase by its unique ID. The ID is the same as the Purchase ID returned in the list response."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

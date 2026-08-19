@@ -1,0 +1,477 @@
+{
+  "item": [
+    {
+      "id": "7aad0627-26c0-4f0e-ac6f-77431934b17c",
+      "name": "Subscriptions",
+      "description": {
+        "content": "Recurring memberships / subscriptions (members).",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "087cb9cb-df11-49eb-9011-d0c91690c45b",
+          "name": "List members / subscriptions",
+          "request": {
+            "name": "List members / subscriptions",
+            "description": {
+              "content": "Returns all of your members (recurring memberships / subscriptions) with both active and inactive statuses, as a paginated collection.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "subscriptions"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "status",
+                  "value": "all",
+                  "description": "Filter by membership status."
+                },
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "1",
+                  "description": "Page number for the paginated collection."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "5a5e5831-8103-4d47-beeb-224df5e473b4",
+              "name": "A paginated list of members / subscriptions.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "subscriptions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "status",
+                      "value": "all"
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"current_page\": 8976,\n  \"first_page_url\": \"string\",\n  \"from\": 2479,\n  \"last_page\": 4216,\n  \"last_page_url\": \"string\",\n  \"next_page_url\": \"string\",\n  \"path\": \"string\",\n  \"per_page\": 2742,\n  \"prev_page_url\": \"string\",\n  \"to\": 8310,\n  \"total\": 5215,\n  \"data\": [\n    {\n      \"subscription_id\": 6053,\n      \"subscription_cancelled_on\": \"string\",\n      \"subscription_created_on\": \"string\",\n      \"subscription_updated_on\": \"string\",\n      \"subscription_current_period_start\": \"string\",\n      \"subscription_current_period_end\": \"string\",\n      \"subscription_coffee_price\": \"string\",\n      \"subscription_coffee_num\": 9777,\n      \"subscription_is_cancelled\": \"string\",\n      \"subscription_is_cancelled_at_period_end\": \"string\",\n      \"subscription_currency\": \"string\",\n      \"subscription_message\": \"string\",\n      \"message_visibility\": 9364,\n      \"subscription_duration_type\": \"string\",\n      \"referer\": \"string\",\n      \"country\": \"string\",\n      \"transaction_id\": \"string\",\n      \"payer_email\": \"string\",\n      \"payer_name\": \"string\"\n    },\n    {\n      \"subscription_id\": 8400,\n      \"subscription_cancelled_on\": \"string\",\n      \"subscription_created_on\": \"string\",\n      \"subscription_updated_on\": \"string\",\n      \"subscription_current_period_start\": \"string\",\n      \"subscription_current_period_end\": \"string\",\n      \"subscription_coffee_price\": \"string\",\n      \"subscription_coffee_num\": 1878,\n      \"subscription_is_cancelled\": \"string\",\n      \"subscription_is_cancelled_at_period_end\": \"string\",\n      \"subscription_currency\": \"string\",\n      \"subscription_message\": \"string\",\n      \"message_visibility\": 5305,\n      \"subscription_duration_type\": \"string\",\n      \"referer\": \"string\",\n      \"country\": \"string\",\n      \"transaction_id\": \"string\",\n      \"payer_email\": \"string\",\n      \"payer_name\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "99f2072c-8812-4622-a6d0-3a676feef210",
+              "name": "Missing or invalid Bearer token.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "subscriptions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "status",
+                      "value": "all"
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "7c928f58-818c-45ac-8086-c7665d13f242",
+              "name": "Too many requests; the client is being throttled.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "subscriptions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "status",
+                      "value": "all"
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "baf32d57-afbf-4128-a387-b9708dea7e2c",
+          "name": "Get a member / subscription by ID",
+          "request": {
+            "name": "Get a member / subscription by ID",
+            "description": {
+              "content": "Returns membership details by passing its unique identifier.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "subscriptions",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "id",
+                  "description": "(Required) The unique identifier of the member / subscription."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "7e8e12c4-ee6c-4e3f-97d4-ed46b5d034bc",
+              "name": "A single member / subscription.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "subscriptions",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier of the member / subscription."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"subscription_id\": 8116,\n  \"subscription_cancelled_on\": \"string\",\n  \"subscription_created_on\": \"string\",\n  \"subscription_updated_on\": \"string\",\n  \"subscription_current_period_start\": \"string\",\n  \"subscription_current_period_end\": \"string\",\n  \"subscription_coffee_price\": \"string\",\n  \"subscription_coffee_num\": 8419,\n  \"subscription_is_cancelled\": \"string\",\n  \"subscription_is_cancelled_at_period_end\": \"string\",\n  \"subscription_currency\": \"string\",\n  \"subscription_message\": \"string\",\n  \"message_visibility\": 3929,\n  \"subscription_duration_type\": \"string\",\n  \"referer\": \"string\",\n  \"country\": \"string\",\n  \"transaction_id\": \"string\",\n  \"payer_email\": \"string\",\n  \"payer_name\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "dc69ad82-dad3-4261-8f67-95a8aa6b72dd",
+              "name": "Missing or invalid Bearer token.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "subscriptions",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier of the member / subscription."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "b2cf9606-42a9-4210-b903-ffa69b2aebc9",
+              "name": "The requested resource was not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "subscriptions",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier of the member / subscription."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "96f434f6-61a0-4ba4-b8d7-5693aad1492a",
+              "name": "Too many requests; the client is being throttled.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "subscriptions",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier of the member / subscription."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://developers.buymeacoffee.com/api/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "d36a9a12-b7db-4798-8a43-1819534d3af5",
+    "name": "Buy Me a Coffee Extras Subscriptions API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Buy Me a Coffee API is a read-only REST interface that gives a creator programmatic access to their own account data on Buy Me a Coffee - a creator-support platform for tips, memberships, and shop purchases. Authentication uses a personal access Bearer token created self-serve in the Developer Dashboard (log in with a regular Buy Me a Coffee account, then Create New Token; a read-only option is available). Add `Authorization: Bearer <token>` to every request. The API returns paginated collections (Laravel-style pagination with current_page, per_page, next_page_url, total, etc.) and exposes one-time supporters, memberships/subscriptions, and Extras purchases.\nNOTE ON MODELING: Buy Me a Coffee does not publish a machine-readable OpenAPI document publicly (the reference sits behind the Developer Dashboard login). The collection endpoints and query parameters here (/subscriptions with status, /supporters, /extras, all paginated) are confirmed from the developer docs, community wrappers, and the Microsoft Power Platform connector. The single-resource by-ID paths (/subscriptions/{id}, /supporters/{id}, /extras/{id}) are honestly modeled from the documented \"get by ID\" operations; the exact URL templates are inferred, not quoted verbatim, and are marked with x-endpoint-modeled.\n\nContact Support:\n Name: Buy Me a Coffee",
+      "type": "text/plain"
+    }
+  }
+}

@@ -1,0 +1,68 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Buy Me a Coffee Extras Subscriptions API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Subscriptions",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List members / subscriptions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://developers.buymeacoffee.com/api/v1/subscriptions",
+            "params": [
+              {
+                "name": "status",
+                "value": "",
+                "type": "query",
+                "description": "Filter by membership status."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Page number for the paginated collection."
+              }
+            ]
+          },
+          "docs": "Returns all of your members (recurring memberships / subscriptions) with both active and inactive statuses, as a paginated collection."
+        },
+        {
+          "info": {
+            "name": "Get a member / subscription by ID",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://developers.buymeacoffee.com/api/v1/subscriptions/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the member / subscription."
+              }
+            ]
+          },
+          "docs": "Returns membership details by passing its unique identifier."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

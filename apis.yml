@@ -28,6 +28,13 @@ image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/buymeacoff
 tags:
 - Creator Economy
 - Memberships
+- Subscription
+- Tips
+- Payments
+- Donations
+tags_raw:
+- Creator Economy
+- Memberships
 - Subscriptions
 - Tips
 - Payments
@@ -39,6 +46,10 @@ apis:
 - aid: buymeacoffee:buymeacoffee-webhooks-api
   name: Buy Me a Coffee Webhooks
   tags:
+  - Webhook
+  - Event
+  - Notification
+  tags_raw:
   - Webhooks
   - Events
   - Notifications
@@ -61,6 +72,8 @@ apis:
   humanURL: https://developers.buymeacoffee.com/
   baseURL: https://developers.buymeacoffee.com/api/v1
   tags:
+  - extras
+  tags_raw:
   - Extras
   properties:
   - type: OpenAPI
@@ -77,6 +90,8 @@ apis:
   humanURL: https://developers.buymeacoffee.com/
   baseURL: https://developers.buymeacoffee.com/api/v1
   tags:
+  - Subscription
+  tags_raw:
   - Subscriptions
   properties:
   - type: OpenAPI

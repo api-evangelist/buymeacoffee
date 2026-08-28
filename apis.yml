@@ -11,6 +11,18 @@ description: Buy Me a Coffee is a creator-support platform that lets fans tip
   extra purchases, and the platform also delivers server-push webhooks for
   donation, membership, and shop events. Buy Me a Coffee charges a flat 5%
   platform fee on transactions with no monthly fee.
+deliveryModel:
+  model: saas
+  open_source: false
+  commercial: true
+  callable_host: true
+  label: Hosted service · you call their endpoint
+  confidence: high
+  source:
+  - openapi
+  - pricing
+  generated: '2026-08-28'
+  method: derived
 accessModel:
   pricing: paid
   onboarding: self-serve

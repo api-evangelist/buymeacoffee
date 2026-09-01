@@ -84,7 +84,7 @@ apis:
   humanURL: https://developers.buymeacoffee.com/
   baseURL: https://developers.buymeacoffee.com/api/v1
   tags:
-  - Extras
+  - extras
   tags_raw:
   - Extras
   properties:

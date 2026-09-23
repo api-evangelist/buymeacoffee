@@ -1,9 +1,7 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
   title: Buy Me a Coffee Extras API
-  description: 'The Buy Me a Coffee API is a read-only REST interface that gives a creator programmatic access to their own account data on Buy Me a Coffee - a creator-support platform for tips, memberships, and shop purchases. Authentication uses a personal access Bearer token created self-serve in the Developer Dashboard (log in with a regular Buy Me a Coffee account, then Create New Token; a read-only option is available). Add `Authorization: Bearer <token>` to every request. The API returns paginated collections (Laravel-style pagination with current_page, per_page, next_page_url, total, etc.) and exposes one-time supporters, memberships/subscriptions, and Extras purchases.
-
-    NOTE ON MODELING: Buy Me a Coffee does not publish a machine-readable OpenAPI document publicly (the reference sits behind the Developer Dashboard login). The collection endpoints and query parameters here (/subscriptions with status, /supporters, /extras, all paginated) are confirmed from the developer docs, community wrappers, and the Microsoft Power Platform connector. The single-resource by-ID paths (/subscriptions/{id}, /supporters/{id}, /extras/{id}) are honestly modeled from the documented "get by ID" operations; the exact URL templates are inferred, not quoted verbatim, and are marked with x-endpoint-modeled.'
+  description: The Buy Me a Coffee API is a read-only REST interface that gives a creator programmatic access to their own account data on Buy Me a Coffee - a creator-support platform for tips, memberships, and shop purchases.
   version: '1.0'
   contact:
     name: Buy Me a Coffee
@@ -66,6 +64,13 @@ paths:
         '429':
           $ref: '#/components/responses/RateLimited'
 components:
+  responses:
+    Unauthorized:
+      description: Missing or invalid Bearer token.
+    RateLimited:
+      description: Too many requests; the client is being throttled.
+    NotFound:
+      description: The requested resource was not found.
   schemas:
     Reward:
       type: object
@@ -77,11 +82,13 @@ components:
         reward_description:
           type: string
         reward_confirmation_message:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         reward_question:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         reward_used:
           type: integer
         reward_created_on:
@@ -89,47 +96,22 @@ components:
         reward_updated_on:
           type: string
         reward_deleted_on:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         reward_is_active:
           type: integer
         reward_image:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         reward_slots:
-          type: integer
-          nullable: true
+          type:
+          - integer
+          - 'null'
         reward_coffee_price:
           type: string
         reward_order:
-          type: integer
-    Pagination:
-      type: object
-      description: Laravel-style pagination envelope wrapping a data array.
-      properties:
-        current_page:
-          type: integer
-        first_page_url:
-          type: string
-        from:
-          type: integer
-        last_page:
-          type: integer
-        last_page_url:
-          type: string
-        next_page_url:
-          type: string
-          nullable: true
-        path:
-          type: string
-        per_page:
-          type: integer
-        prev_page_url:
-          type: string
-          nullable: true
-        to:
-          type: integer
-        total:
           type: integer
     Extra:
       type: object
@@ -147,15 +129,47 @@ components:
         purchase_currency:
           type: string
         purchase_question:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         payer_email:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         payer_name:
           type: string
         extra:
           $ref: '#/components/schemas/Reward'
+    Pagination:
+      type: object
+      description: Laravel-style pagination envelope wrapping a data array.
+      properties:
+        current_page:
+          type: integer
+        first_page_url:
+          type: string
+        from:
+          type: integer
+        last_page:
+          type: integer
+        last_page_url:
+          type: string
+        next_page_url:
+          type:
+          - string
+          - 'null'
+        path:
+          type: string
+        per_page:
+          type: integer
+        prev_page_url:
+          type:
+          - string
+          - 'null'
+        to:
+          type: integer
+        total:
+          type: integer
     ExtraPage:
       allOf:
       - $ref: '#/components/schemas/Pagination'
@@ -165,13 +179,6 @@ components:
             type: array
             items:
               $ref: '#/components/schemas/Extra'
-  responses:
-    NotFound:
-      description: The requested resource was not found.
-    Unauthorized:
-      description: Missing or invalid Bearer token.
-    RateLimited:
-      description: Too many requests; the client is being throttled.
   parameters:
     Page:
       name: page

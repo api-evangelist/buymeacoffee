@@ -1,9 +1,7 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Buy Me a Coffee Extras Supporters API
-  description: 'The Buy Me a Coffee API is a read-only REST interface that gives a creator programmatic access to their own account data on Buy Me a Coffee - a creator-support platform for tips, memberships, and shop purchases. Authentication uses a personal access Bearer token created self-serve in the Developer Dashboard (log in with a regular Buy Me a Coffee account, then Create New Token; a read-only option is available). Add `Authorization: Bearer <token>` to every request. The API returns paginated collections (Laravel-style pagination with current_page, per_page, next_page_url, total, etc.) and exposes one-time supporters, memberships/subscriptions, and Extras purchases.
-
-    NOTE ON MODELING: Buy Me a Coffee does not publish a machine-readable OpenAPI document publicly (the reference sits behind the Developer Dashboard login). The collection endpoints and query parameters here (/subscriptions with status, /supporters, /extras, all paginated) are confirmed from the developer docs, community wrappers, and the Microsoft Power Platform connector. The single-resource by-ID paths (/subscriptions/{id}, /supporters/{id}, /extras/{id}) are honestly modeled from the documented "get by ID" operations; the exact URL templates are inferred, not quoted verbatim, and are marked with x-endpoint-modeled.'
+  title: Buy Me a Coffee Supporters API
+  description: The Buy Me a Coffee API is a read-only REST interface that gives a creator programmatic access to their own account data on Buy Me a Coffee - a creator-support platform for tips, memberships, and shop purchases.
   version: '1.0'
   contact:
     name: Buy Me a Coffee
@@ -67,13 +65,68 @@ paths:
           $ref: '#/components/responses/RateLimited'
 components:
   responses:
-    NotFound:
-      description: The requested resource was not found.
     Unauthorized:
       description: Missing or invalid Bearer token.
     RateLimited:
       description: Too many requests; the client is being throttled.
+    NotFound:
+      description: The requested resource was not found.
   schemas:
+    Supporter:
+      type: object
+      properties:
+        support_id:
+          type: integer
+        support_note:
+          type:
+          - string
+          - 'null'
+        support_coffees:
+          type: integer
+        transaction_id:
+          type: string
+        support_visibility:
+          type: integer
+        support_created_on:
+          type: string
+        support_updated_on:
+          type: string
+        transfer_id:
+          type:
+          - string
+          - 'null'
+        supporter_name:
+          type: string
+        support_coffee_price:
+          type: string
+        support_email:
+          type:
+          - string
+          - 'null'
+        is_refunded:
+          type:
+          - string
+          - 'null'
+        support_currency:
+          type: string
+        support_note_pinned:
+          type: integer
+        referer:
+          type:
+          - string
+          - 'null'
+        country:
+          type:
+          - string
+          - 'null'
+        payer_email:
+          type:
+          - string
+          - 'null'
+        payment_platform:
+          type: string
+        payer_name:
+          type: string
     SupporterPage:
       allOf:
       - $ref: '#/components/schemas/Pagination'
@@ -98,67 +151,21 @@ components:
         last_page_url:
           type: string
         next_page_url:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         path:
           type: string
         per_page:
           type: integer
         prev_page_url:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         to:
           type: integer
         total:
           type: integer
-    Supporter:
-      type: object
-      properties:
-        support_id:
-          type: integer
-        support_note:
-          type: string
-          nullable: true
-        support_coffees:
-          type: integer
-        transaction_id:
-          type: string
-        support_visibility:
-          type: integer
-        support_created_on:
-          type: string
-        support_updated_on:
-          type: string
-        transfer_id:
-          type: string
-          nullable: true
-        supporter_name:
-          type: string
-        support_coffee_price:
-          type: string
-        support_email:
-          type: string
-          nullable: true
-        is_refunded:
-          type: string
-          nullable: true
-        support_currency:
-          type: string
-        support_note_pinned:
-          type: integer
-        referer:
-          type: string
-          nullable: true
-        country:
-          type: string
-          nullable: true
-        payer_email:
-          type: string
-          nullable: true
-        payment_platform:
-          type: string
-        payer_name:
-          type: string
   parameters:
     Page:
       name: page

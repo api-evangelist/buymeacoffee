@@ -1,9 +1,7 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Buy Me a Coffee Extras Subscriptions API
-  description: 'The Buy Me a Coffee API is a read-only REST interface that gives a creator programmatic access to their own account data on Buy Me a Coffee - a creator-support platform for tips, memberships, and shop purchases. Authentication uses a personal access Bearer token created self-serve in the Developer Dashboard (log in with a regular Buy Me a Coffee account, then Create New Token; a read-only option is available). Add `Authorization: Bearer <token>` to every request. The API returns paginated collections (Laravel-style pagination with current_page, per_page, next_page_url, total, etc.) and exposes one-time supporters, memberships/subscriptions, and Extras purchases.
-
-    NOTE ON MODELING: Buy Me a Coffee does not publish a machine-readable OpenAPI document publicly (the reference sits behind the Developer Dashboard login). The collection endpoints and query parameters here (/subscriptions with status, /supporters, /extras, all paginated) are confirmed from the developer docs, community wrappers, and the Microsoft Power Platform connector. The single-resource by-ID paths (/subscriptions/{id}, /supporters/{id}, /extras/{id}) are honestly modeled from the documented "get by ID" operations; the exact URL templates are inferred, not quoted verbatim, and are marked with x-endpoint-modeled.'
+  title: Buy Me a Coffee Subscriptions API
+  description: The Buy Me a Coffee API is a read-only REST interface that gives a creator programmatic access to their own account data on Buy Me a Coffee - a creator-support platform for tips, memberships, and shop purchases.
   version: '1.0'
   contact:
     name: Buy Me a Coffee
@@ -78,12 +76,22 @@ paths:
           $ref: '#/components/responses/RateLimited'
 components:
   responses:
-    NotFound:
-      description: The requested resource was not found.
     Unauthorized:
       description: Missing or invalid Bearer token.
     RateLimited:
       description: Too many requests; the client is being throttled.
+    NotFound:
+      description: The requested resource was not found.
+  parameters:
+    Page:
+      name: page
+      in: query
+      required: false
+      description: Page number for the paginated collection.
+      schema:
+        type: integer
+        minimum: 1
+        default: 1
   schemas:
     Subscription:
       type: object
@@ -91,8 +99,9 @@ components:
         subscription_id:
           type: integer
         subscription_cancelled_on:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         subscription_created_on:
           type: string
         subscription_updated_on:
@@ -106,31 +115,37 @@ components:
         subscription_coffee_num:
           type: integer
         subscription_is_cancelled:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         subscription_is_cancelled_at_period_end:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         subscription_currency:
           type: string
         subscription_message:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         message_visibility:
           type: integer
         subscription_duration_type:
           type: string
         referer:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         country:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         transaction_id:
           type: string
         payer_email:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         payer_name:
           type: string
     Pagination:
@@ -148,15 +163,17 @@ components:
         last_page_url:
           type: string
         next_page_url:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         path:
           type: string
         per_page:
           type: integer
         prev_page_url:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         to:
           type: integer
         total:
@@ -170,16 +187,6 @@ components:
             type: array
             items:
               $ref: '#/components/schemas/Subscription'
-  parameters:
-    Page:
-      name: page
-      in: query
-      required: false
-      description: Page number for the paginated collection.
-      schema:
-        type: integer
-        minimum: 1
-        default: 1
   securitySchemes:
     bearerAuth:
       type: http

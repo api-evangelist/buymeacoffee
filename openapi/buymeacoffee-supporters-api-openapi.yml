@@ -72,6 +72,15 @@ components:
     NotFound:
       description: The requested resource was not found.
   schemas:
+    SupporterPage:
+      allOf:
+      - $ref: '#/components/schemas/Pagination'
+      - type: object
+        properties:
+          data:
+            type: array
+            items:
+              $ref: '#/components/schemas/Supporter'
     Supporter:
       type: object
       properties:
@@ -127,15 +136,6 @@ components:
           type: string
         payer_name:
           type: string
-    SupporterPage:
-      allOf:
-      - $ref: '#/components/schemas/Pagination'
-      - type: object
-        properties:
-          data:
-            type: array
-            items:
-              $ref: '#/components/schemas/Supporter'
     Pagination:
       type: object
       description: Laravel-style pagination envelope wrapping a data array.

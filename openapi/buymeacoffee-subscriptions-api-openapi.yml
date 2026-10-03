@@ -75,23 +75,7 @@ paths:
         '429':
           $ref: '#/components/responses/RateLimited'
 components:
-  responses:
-    Unauthorized:
-      description: Missing or invalid Bearer token.
-    RateLimited:
-      description: Too many requests; the client is being throttled.
-    NotFound:
-      description: The requested resource was not found.
   schemas:
-    SubscriptionPage:
-      allOf:
-      - $ref: '#/components/schemas/Pagination'
-      - type: object
-        properties:
-          data:
-            type: array
-            items:
-              $ref: '#/components/schemas/Subscription'
     Subscription:
       type: object
       properties:
@@ -177,6 +161,15 @@ components:
           type: integer
         total:
           type: integer
+    SubscriptionPage:
+      allOf:
+      - $ref: '#/components/schemas/Pagination'
+      - type: object
+        properties:
+          data:
+            type: array
+            items:
+              $ref: '#/components/schemas/Subscription'
   parameters:
     Page:
       name: page
@@ -187,6 +180,13 @@ components:
         type: integer
         minimum: 1
         default: 1
+  responses:
+    Unauthorized:
+      description: Missing or invalid Bearer token.
+    NotFound:
+      description: The requested resource was not found.
+    RateLimited:
+      description: Too many requests; the client is being throttled.
   securitySchemes:
     bearerAuth:
       type: http

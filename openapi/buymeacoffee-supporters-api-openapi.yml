@@ -64,23 +64,37 @@ paths:
         '429':
           $ref: '#/components/responses/RateLimited'
 components:
-  responses:
-    Unauthorized:
-      description: Missing or invalid Bearer token.
-    RateLimited:
-      description: Too many requests; the client is being throttled.
-    NotFound:
-      description: The requested resource was not found.
   schemas:
-    SupporterPage:
-      allOf:
-      - $ref: '#/components/schemas/Pagination'
-      - type: object
-        properties:
-          data:
-            type: array
-            items:
-              $ref: '#/components/schemas/Supporter'
+    Pagination:
+      type: object
+      description: Laravel-style pagination envelope wrapping a data array.
+      properties:
+        current_page:
+          type: integer
+        first_page_url:
+          type: string
+        from:
+          type: integer
+        last_page:
+          type: integer
+        last_page_url:
+          type: string
+        next_page_url:
+          type:
+          - string
+          - 'null'
+        path:
+          type: string
+        per_page:
+          type: integer
+        prev_page_url:
+          type:
+          - string
+          - 'null'
+        to:
+          type: integer
+        total:
+          type: integer
     Supporter:
       type: object
       properties:
@@ -136,36 +150,15 @@ components:
           type: string
         payer_name:
           type: string
-    Pagination:
-      type: object
-      description: Laravel-style pagination envelope wrapping a data array.
-      properties:
-        current_page:
-          type: integer
-        first_page_url:
-          type: string
-        from:
-          type: integer
-        last_page:
-          type: integer
-        last_page_url:
-          type: string
-        next_page_url:
-          type:
-          - string
-          - 'null'
-        path:
-          type: string
-        per_page:
-          type: integer
-        prev_page_url:
-          type:
-          - string
-          - 'null'
-        to:
-          type: integer
-        total:
-          type: integer
+    SupporterPage:
+      allOf:
+      - $ref: '#/components/schemas/Pagination'
+      - type: object
+        properties:
+          data:
+            type: array
+            items:
+              $ref: '#/components/schemas/Supporter'
   parameters:
     Page:
       name: page
@@ -176,6 +169,13 @@ components:
         type: integer
         minimum: 1
         default: 1
+  responses:
+    Unauthorized:
+      description: Missing or invalid Bearer token.
+    NotFound:
+      description: The requested resource was not found.
+    RateLimited:
+      description: Too many requests; the client is being throttled.
   securitySchemes:
     bearerAuth:
       type: http

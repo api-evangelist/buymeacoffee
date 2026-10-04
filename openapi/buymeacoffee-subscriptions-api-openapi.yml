@@ -170,6 +170,13 @@ components:
             type: array
             items:
               $ref: '#/components/schemas/Subscription'
+  responses:
+    Unauthorized:
+      description: Missing or invalid Bearer token.
+    NotFound:
+      description: The requested resource was not found.
+    RateLimited:
+      description: Too many requests; the client is being throttled.
   parameters:
     Page:
       name: page
@@ -180,13 +187,6 @@ components:
         type: integer
         minimum: 1
         default: 1
-  responses:
-    Unauthorized:
-      description: Missing or invalid Bearer token.
-    NotFound:
-      description: The requested resource was not found.
-    RateLimited:
-      description: Too many requests; the client is being throttled.
   securitySchemes:
     bearerAuth:
       type: http

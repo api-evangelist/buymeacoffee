@@ -64,7 +64,41 @@ paths:
         '429':
           $ref: '#/components/responses/RateLimited'
 components:
+  responses:
+    Unauthorized:
+      description: Missing or invalid Bearer token.
+    NotFound:
+      description: The requested resource was not found.
+    RateLimited:
+      description: Too many requests; the client is being throttled.
   schemas:
+    Extra:
+      type: object
+      properties:
+        purchase_id:
+          type: integer
+        purchased_on:
+          type: string
+        purchase_updated_on:
+          type: string
+        purchase_is_revoked:
+          type: integer
+        purchase_amount:
+          type: string
+        purchase_currency:
+          type: string
+        purchase_question:
+          type:
+          - string
+          - 'null'
+        payer_email:
+          type:
+          - string
+          - 'null'
+        payer_name:
+          type: string
+        extra:
+          $ref: '#/components/schemas/Reward'
     Pagination:
       type: object
       description: Laravel-style pagination envelope wrapping a data array.
@@ -95,33 +129,15 @@ components:
           type: integer
         total:
           type: integer
-    Extra:
-      type: object
-      properties:
-        purchase_id:
-          type: integer
-        purchased_on:
-          type: string
-        purchase_updated_on:
-          type: string
-        purchase_is_revoked:
-          type: integer
-        purchase_amount:
-          type: string
-        purchase_currency:
-          type: string
-        purchase_question:
-          type:
-          - string
-          - 'null'
-        payer_email:
-          type:
-          - string
-          - 'null'
-        payer_name:
-          type: string
-        extra:
-          $ref: '#/components/schemas/Reward'
+    ExtraPage:
+      allOf:
+      - $ref: '#/components/schemas/Pagination'
+      - type: object
+        properties:
+          data:
+            type: array
+            items:
+              $ref: '#/components/schemas/Extra'
     Reward:
       type: object
       properties:
@@ -163,15 +179,6 @@ components:
           type: string
         reward_order:
           type: integer
-    ExtraPage:
-      allOf:
-      - $ref: '#/components/schemas/Pagination'
-      - type: object
-        properties:
-          data:
-            type: array
-            items:
-              $ref: '#/components/schemas/Extra'
   parameters:
     Page:
       name: page
@@ -182,13 +189,6 @@ components:
         type: integer
         minimum: 1
         default: 1
-  responses:
-    Unauthorized:
-      description: Missing or invalid Bearer token.
-    NotFound:
-      description: The requested resource was not found.
-    RateLimited:
-      description: Too many requests; the client is being throttled.
   securitySchemes:
     bearerAuth:
       type: http

@@ -107,3 +107,30 @@ plans:
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
+x-canonical:
+  generated: '2026-10-08'
+  vocabulary: all/0-working/economics/plans-canonical.yml
+  models:
+  - metered
+  units:
+  - period
+  - transaction
+  plans:
+  - name: Creator (No Monthly Fee)
+    access: other
+    model: metered
+    model_how: stated
+    units:
+    - period
+    - transaction
+    periods:
+    - month
+  - name: Payment Processing (Stripe)
+    access: other
+    model: metered
+    model_how: stated
+    units:
+    - other
+    - transaction
+    periods:
+    - month

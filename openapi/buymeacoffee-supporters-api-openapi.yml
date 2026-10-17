@@ -65,15 +65,6 @@ paths:
           $ref: '#/components/responses/RateLimited'
 components:
   schemas:
-    SupporterPage:
-      allOf:
-      - $ref: '#/components/schemas/Pagination'
-      - type: object
-        properties:
-          data:
-            type: array
-            items:
-              $ref: '#/components/schemas/Supporter'
     Pagination:
       type: object
       description: Laravel-style pagination envelope wrapping a data array.
@@ -159,13 +150,22 @@ components:
           type: string
         payer_name:
           type: string
+    SupporterPage:
+      allOf:
+      - $ref: '#/components/schemas/Pagination'
+      - type: object
+        properties:
+          data:
+            type: array
+            items:
+              $ref: '#/components/schemas/Supporter'
   responses:
     Unauthorized:
       description: Missing or invalid Bearer token.
-    NotFound:
-      description: The requested resource was not found.
     RateLimited:
       description: Too many requests; the client is being throttled.
+    NotFound:
+      description: The requested resource was not found.
   parameters:
     Page:
       name: page

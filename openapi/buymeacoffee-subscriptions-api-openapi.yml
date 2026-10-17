@@ -76,6 +76,36 @@ paths:
           $ref: '#/components/responses/RateLimited'
 components:
   schemas:
+    Pagination:
+      type: object
+      description: Laravel-style pagination envelope wrapping a data array.
+      properties:
+        current_page:
+          type: integer
+        first_page_url:
+          type: string
+        from:
+          type: integer
+        last_page:
+          type: integer
+        last_page_url:
+          type: string
+        next_page_url:
+          type:
+          - string
+          - 'null'
+        path:
+          type: string
+        per_page:
+          type: integer
+        prev_page_url:
+          type:
+          - string
+          - 'null'
+        to:
+          type: integer
+        total:
+          type: integer
     Subscription:
       type: object
       properties:
@@ -131,36 +161,6 @@ components:
           - 'null'
         payer_name:
           type: string
-    Pagination:
-      type: object
-      description: Laravel-style pagination envelope wrapping a data array.
-      properties:
-        current_page:
-          type: integer
-        first_page_url:
-          type: string
-        from:
-          type: integer
-        last_page:
-          type: integer
-        last_page_url:
-          type: string
-        next_page_url:
-          type:
-          - string
-          - 'null'
-        path:
-          type: string
-        per_page:
-          type: integer
-        prev_page_url:
-          type:
-          - string
-          - 'null'
-        to:
-          type: integer
-        total:
-          type: integer
     SubscriptionPage:
       allOf:
       - $ref: '#/components/schemas/Pagination'
@@ -173,10 +173,10 @@ components:
   responses:
     Unauthorized:
       description: Missing or invalid Bearer token.
-    NotFound:
-      description: The requested resource was not found.
     RateLimited:
       description: Too many requests; the client is being throttled.
+    NotFound:
+      description: The requested resource was not found.
   parameters:
     Page:
       name: page

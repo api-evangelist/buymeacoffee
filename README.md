@@ -1,4 +1,4 @@
-# Buy Me a Coffee (buymeacoffee)
+# Buy Me a Coffee
 
 <!-- API-EVANGELIST-PROVENANCE:BEGIN -->
 > ### About this repository
@@ -64,81 +64,122 @@
 > Full detail: **[Where this data comes from](https://apievangelist.com/about/where-our-data-comes-from)**
 <!-- API-EVANGELIST-PROVENANCE:END -->
 
-Buy Me a Coffee is a creator-support platform that lets fans tip creators ("buy a coffee"), subscribe to recurring memberships, and buy extras from a creator's shop. Its developer API is a **read-only REST interface** (base `https://developers.buymeacoffee.com/api/v1`) that gives a creator programmatic access to their own account data: one-time supporters, memberships/subscriptions, and Extras purchases.
+Buy Me a Coffee is a creator-support platform that lets fans tip creators ("buy a coffee"), subscribe to recurring memberships, and buy extras from a creator's shop. Its developer API is a read-only REST interface (base https://developers.buymeacoffee.com/api/v1) authenticated with a personal access Bearer token created self-serve in the Developer Dashboard. The API exposes a creator's own one-time supporters, memberships/subscriptions, and extra purchases, and the platform also delivers server-push webhooks for donation, membership, and shop events. Buy Me a Coffee charges a flat 5% platform fee on transactions with no monthly fee.
 
-**APIs.json:** [https://raw.githubusercontent.com/api-evangelist/buymeacoffee/refs/heads/main/apis.yml](https://raw.githubusercontent.com/api-evangelist/buymeacoffee/refs/heads/main/apis.yml)
+**Areas:** Creator Economy · Membership · Subscription · Tips · Payments · Donations
 
-## Access Model & Authentication
+## Buy Me a Coffee on APIs.io
 
-- **Public and self-serve.** Any Buy Me a Coffee account holder can create a personal access token in the **Developer Dashboard** (log in with your regular Buy Me a Coffee account, then **Create New Token**; a read-only option is available). There is no partner/approval gate.
-- **Bearer token.** Add `Authorization: Bearer <token>` to every request.
-- **Read-only.** The documented API is GET-only and scoped to the creator's own account data.
-- **Note on documentation.** The full API reference sits behind the Developer Dashboard login, and Buy Me a Coffee does not publish a machine-readable OpenAPI document publicly. The collection endpoints and query params here (`/supporters`, `/subscriptions` with `status`, `/extras`, all paginated) are confirmed from the developer docs, community wrappers, and the Microsoft Power Platform connector. The single-resource **by-ID** paths (`/supporters/{id}`, `/subscriptions/{id}`, `/extras/{id}`) are honestly **modeled** from the documented "get by ID" operations — the exact URL templates are inferred, not quoted verbatim.
+Everything profiled for Buy Me a Coffee is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/buymeacoffee/](https://apis.io/providers/buymeacoffee/)** — or go straight to one of the APIs or properties below.
 
-## Tags
+### APIs (4)
 
-- Creator Economy
-- Memberships
-- Subscriptions
-- Tips
-- Payments
-- Donations
+- [Buy Me a Coffee Webhooks](https://apis.io/apis/buymeacoffee/buymeacoffee-webhooks-api/) — Server-push HTTP webhooks configured in the dashboard (Integrations - New webhook). Buy Me a Coffee POSTs a JSON event envelope to a subscriber URL for…
+- [Buy Me a Coffee Extras API](https://apis.io/apis/buymeacoffee/buymeacoffee-extras-api/) — Extras purchases (shop items and rewards). BETA.
+- [Buy Me a Coffee Subscriptions API](https://apis.io/apis/buymeacoffee/buymeacoffee-subscriptions-api/) — Recurring memberships / subscriptions (members).
+- [Buy Me a Coffee Supporters API](https://apis.io/apis/buymeacoffee/buymeacoffee-supporters-api/) — One-time supporters (tips / coffees) and their messages.
 
-## Timestamps
+### Published properties
 
-- **Created:** 2026-07-05
-- **Modified:** 2026-07-05
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
 
-## APIs
+#### Agentic access (1)
 
-### Buy Me a Coffee Supporters API
+Which operations an agent can call, which act, and which need a human in the loop.
 
-Read-only access to a creator's one-time supporters (tips / "coffees") and the messages they leave. List all supporters with pagination, or retrieve a single supporter by its unique ID.
+- [Buymeacoffee Agentic Access](https://apis.io/agentic-access/buymeacoffee/buymeacoffee-agentic-access/)
 
-- **Base URL:** `https://developers.buymeacoffee.com/api/v1`
-- `GET /supporters` — list one-time supporters (paginated)
-- `GET /supporters/{id}` — get a supporter by ID *(modeled)*
+#### Collections (4)
 
-### Buy Me a Coffee Subscriptions API
+Postman and Open Collection request collections.
 
-Read-only access to a creator's recurring memberships / subscriptions. List members filtered by status (`all`, `active`, `inactive`) with pagination, or retrieve a single member's subscription details by ID.
+- [Buy Me a Coffee API](https://apis.io/collections/buymeacoffee/open-buymeacoffee/)
+- [Buy Me a Coffee Extras API](https://apis.io/collections/buymeacoffee/open-buymeacoffee-extras-api/)
+- [Buy Me a Coffee Extras Subscriptions API](https://apis.io/collections/buymeacoffee/open-buymeacoffee-subscriptions-api/)
+- [Buy Me a Coffee Extras Supporters API](https://apis.io/collections/buymeacoffee/open-buymeacoffee-supporters-api/)
 
-- **Base URL:** `https://developers.buymeacoffee.com/api/v1`
-- `GET /subscriptions?status=active` — list members / subscriptions (paginated)
-- `GET /subscriptions/{id}` — get a member by ID *(modeled)*
+#### Security (2)
 
-### Buy Me a Coffee Extras API (BETA)
+Authentication, trust centre, and vulnerability disclosure.
 
-Read-only access to a creator's Extras purchases — the shop items and rewards fans buy. List all extra purchases with pagination, or retrieve a single extra purchase by its unique Purchase ID.
+- [Buymeacoffee Authentication](https://apis.io/security/buymeacoffee/buymeacoffee-authentication/)
+- [Buymeacoffee Domain Security](https://apis.io/security/buymeacoffee/buymeacoffee-domain-security/)
 
-- **Base URL:** `https://developers.buymeacoffee.com/api/v1`
-- `GET /extras` — list Extras purchases (paginated)
-- `GET /extras/{id}` — get an Extras purchase by ID *(modeled)*
+#### Plans and pricing (1)
 
-### Buy Me a Coffee Webhooks
+Published plans, tiers and prices.
 
-Server-push HTTP webhooks configured in the dashboard (**Integrations → New webhook**). Buy Me a Coffee POSTs a JSON event envelope to your subscriber URL for donation, membership / recurring-donation, extra purchase, commission, and wishlist events. Each request is signed with an **HMAC-SHA256** signature in the `x-signature-sha256` header. This is server-to-endpoint HTTP, **not** a WebSocket.
+- [Buymeacoffee Plans Pricing](https://apis.io/plans/buymeacoffee/buymeacoffee-plans-pricing/)
 
-Event types include: `donation.created`, `donation.refunded`, `membership.started`, `membership.updated`, `membership.cancelled`, `membership.paused`, `recurring_donation.started`, `recurring_donation.updated`, `recurring_donation.cancelled`, `extra_purchase.created`, `extra_purchase.updated`, `extra_purchase.refunded`, `commission_order.created`, `commission_order.refunded`, `wishlist_payment.created`, `wishlist_payment.refunded`.
+#### Rate limits (1)
 
-## Pricing
+Published request limits.
 
-No monthly fee. Buy Me a Coffee retains a **flat 5% platform fee** per transaction (tips, memberships, and shop sales); creators keep 95% before payment processing. Standard Stripe processing (~2.9% + $0.30 per transaction, plus a small payout fee) is charged separately. The developer API is free to use. See [`plans/buymeacoffee-plans-pricing.yml`](plans/buymeacoffee-plans-pricing.yml).
+- [Buymeacoffee Rate Limits](https://apis.io/rate-limits/buymeacoffee/buymeacoffee-rate-limits/)
 
-## WebSocket Review
+#### FinOps (1)
 
-Buy Me a Coffee does **not** expose a documented public WebSocket API. Its own API is request/response REST, and its only server-push mechanism is outbound HTTP webhooks. See [`review.yml`](review.yml).
+What the API costs to run, by operation.
 
-## Common Properties
+- [Buymeacoffee Finops](https://apis.io/finops/buymeacoffee/buymeacoffee-finops/)
 
-- [LinkedIn](https://www.linkedin.com/company/buymeacoffee)
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
+
 - [Website](https://www.buymeacoffee.com)
 - [Documentation](https://developers.buymeacoffee.com/)
-- [Plans](plans/buymeacoffee-plans-pricing.yml)
-- [Rate Limits](rate-limits/buymeacoffee-rate-limits.yml)
-- [Fin Ops](finops/buymeacoffee-finops.yml)
+- [Blog](https://buymeacoffee.com/blog/)
 
-## Maintainers
+## API Evangelist rating
 
-**FN:** Kin Lane
-**Email:** kin@apievangelist.com
+**Kin Score 24.9** — emerging · rubric 0.24.0 · scored 2026-10-17
+
+| Facet | Score |
+|---|---|
+| Discoverability | 66.1 |
+| Contract quality | 50.2 |
+| Contract governance | 0.0 |
+| Operational transparency | 7.9 |
+| Developer ergonomics | 25.0 |
+| Access clarity | 5.3 |
+
+**Agent readiness 20.7** — agent-aware
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | derived (partial credit) |
+| Reversibility Documented | na |
+| MCP Server | — |
+| Auth Clarity | bearer (partial credit) |
+| Idempotency | na |
+| Error Semantics | — |
+| OpenAPI Examples | — |
+| Rate Limit Signal | derived (partial credit) |
+| Event Surface Described | — |
+| Agent Skills | — |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | na |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+
+**Regulatory alignment 10.7** — Payments
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/buymeacoffee/](https://apis.io/providers/buymeacoffee/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for Buy Me a Coffee: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/buymeacoffee/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
